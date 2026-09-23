@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Practice Form – TTD Govinda Autofill (Free)</title>
+<meta name="description" content="A practice pilgrim form for trying TTD Govinda Autofill (Free). Not TTD's site; nothing typed here is sent anywhere.">
+<link rel="icon" href="icons/icon32.png">
+<style>
+  :root { --bg: #fffaf3; --card: #ffffff; --fg: #2b2118; --muted: #6b5b4b; --line: #f0dfc6; --accent: #b5460f; --field: #2e7d32; --btn: #1f4e79; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --bg: #1d1915; --card: #26211b; --fg: #f1e9df; --muted: #a8998a; --line: #3a322a; --accent: #e0793f; --field: #7bc47f; --btn: #3d7bb8; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 20px 16px 48px; }
+  h1 { font-size: 26px; margin: 8px 0 4px; }
+  .note { background: var(--card); border: 1px solid var(--line); border-left: 5px solid var(--accent); border-radius: 12px; padding: 12px 16px; margin: 12px 0 20px; }
+  .note ol { margin: 6px 0 0; padding-left: 22px; }
+  form { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px; }
+  h2 { font-size: 20px; margin: 0 0 12px; }
+  h3 { font-size: 16px; margin: 22px 0 10px; }
+  .persons { display: flex; gap: 10px; align-items: center; margin-bottom: 14px; }
+  .row { display: grid; grid-template-columns: 2.2fr .7fr 1fr 1.2fr 1.6fr; gap: 12px; padding: 10px 0; border-top: 1px solid var(--line); }
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  label { display: grid; gap: 4px; font-size: 13px; color: var(--muted); }
+  input, select { font: inherit; color: var(--fg); background: transparent; border: 0; border-bottom: 2px solid var(--line); padding: 6px 2px; min-width: 0; }
+  input:focus, select:focus { outline: none; border-bottom-color: var(--accent); }
+  input:not(:placeholder-shown), select.set { border-bottom-color: var(--field); }
+  input:disabled { opacity: .5; }
+  .btns { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; }
+  button { font: inherit; font-weight: 700; border-radius: 8px; padding: 9px 22px; cursor: pointer; border: 1px solid var(--line); background: var(--card); color: var(--fg); }
+  button.go { background: var(--btn); border-color: var(--btn); color: #fff; }
+  #done { margin-top: 14px; font-weight: 600; color: var(--field); }
+  a { color: var(--accent); }
+  @media (max-width: 720px) {
+    .row { grid-template-columns: 1fr 1fr; }
+    .row label:first-child { grid-column: 1 / -1; }
+    .grid3 { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a href="./">← TTD Govinda Autofill (Free)</a>
+  <h1>Practice form</h1>
+  <div class="note">
+    <strong>This is not TTD's website.</strong> It is a simple copy of the pilgrim step of a booking form, for trying the
+    extension before booking day. Nothing typed here is sent anywhere, and the Continue button below does nothing.
+    <ol>
+      <li>Open the extension, go to <em>Settings</em> and tick <em>Also fill on sites other than TTD</em> (it is off by default).</li>
+      <li>Come back to this page and click <em>Fill this page</em> in the extension, or press <kbd>Alt</kbd>+<kbd>A</kbd>.</li>
+      <li>Check the boxes, then untick that setting again if you like.</li>
+    </ol>
+  </div>
+
+  <form id="f" autocomplete="off" novalidate>
+    <h2>Pilgrim Details</h2>
+    <div class="persons">
+      <label for="count" style="display:inline">Number of persons</label>
+      <select id="count" name="noOfPersons"></select>
+    </div>
+    <div id="rows"></div>
+
+    <h3>General Details</h3>
+    <div class="grid3">
+      <label>Email<input type="email" name="emailId" placeholder=" " maxlength="80"></label>
+      <label>City<input type="text" name="city" placeholder=" " maxlength="50"></label>
+      <label>State<input type="text" name="state" placeholder=" " maxlength="50"></label>
+      <label>Country<input type="text" name="country" placeholder=" " maxlength="50"></label>
+      <label>Pincode<input type="text" name="pincode" placeholder=" " maxlength="6" inputmode="numeric"></label>
+    </div>
+
+    <div class="btns">
+      <button type="button" onclick="history.back()">Back</button>
+      <button type="submit" class="go">Continue</button>
+    </div>
+    <div id="done" role="status"></div>
+  </form>
+</div>
+<script>
+  // Pilgrim rows like the booking form's: the ID number box stays locked until an ID proof is chosen.
+  const rows = document.getElementById('rows');
+  const count = document.getElementById('count');
+  for (let n = 1; n <= 6; n++) count.append(new Option(String(n), String(n), n === 1, n === 1));
+  const row = (i) => {
+    const r = document.createElement('div');
+    r.className = 'row';
+    r.innerHTML = `
+      <label>Name<input type="text" name="fname" placeholder=" " maxlength="80"></label>
+      <label>Age<input type="text" name="age" placeholder=" " maxlength="3" inputmode="numeric"></label>
+      <label>Gender<select name="gender"><option value="">Select</option><option>Male</option><option>Female</option><option>Transgender</option></select></label>
+      <label>Photo ID Proof<select name="photoIdType"><option value="">Select</option><option>Aadhaar Card</option><option>Passport</option></select></label>
+      <label>Photo Id Number<input type="text" name="idProofNumber" placeholder=" " maxlength="12" disabled></label>`;
+    const type = r.querySelector('[name=photoIdType]');
+    const num = r.querySelector('[name=idProofNumber]');
+    r.querySelectorAll('select').forEach((s) => s.addEventListener('change', () => s.classList.toggle('set', !!s.value)));
+    type.addEventListener('change', () => { num.disabled = !type.value; num.maxLength = type.value === 'Passport' ? 10 : 12; });
+    return r;
+  };
+  const draw = () => {
+    const n = +count.value;
+    while (rows.children.length < n) rows.append(row(rows.children.length));
+    while (rows.children.length > n) rows.lastElementChild.remove();
+  };
+  count.addEventListener('change', draw);
+  draw();
+  document.getElementById('f').addEventListener('submit', (e) => {
+    e.preventDefault();
+    document.getElementById('done').textContent = 'You pressed Continue yourself. On this practice page nothing is sent anywhere.';
+  });
+</script>
+</body>
+</html>

@@ -36,14 +36,17 @@
 
   <h2>Where it is stored</h2>
   <p>Everything is kept in Chrome's local extension storage on your computer. <strong>Nothing is sent to the developer or to any server.</strong> The extension has no backend, no analytics, no advertising and no tracking, and it does not load code from the internet.</p>
-  <p>If you set a master password, your saved details are encrypted with AES-256-GCM using a key derived from that password (PBKDF2, 310,000 iterations). The unlocked key is kept only in memory and is cleared when Chrome closes. The password itself is never stored.</p>
+  <p>The first time you open the extension, it explains this and asks you to agree before anything can be saved or filled.</p>
+  <p>While Chrome is open, a pilgrim form you have not saved yet is kept in Chrome's in-memory session storage, so it survives the popup closing; it is cleared when you save it or when Chrome closes.</p>
+  <p>If you set a master password, your saved pilgrim and contact details are encrypted with AES-256-GCM using a key derived from that password (PBKDF2, 310,000 iterations). The unlocked key is kept only in memory and is cleared when Chrome closes. The password itself is never stored. It is the extension's own optional lock, not your TTD login: the extension never reads or stores TTD login details or OTPs. Your language, reminder and release settings are not encrypted.</p>
 
   <h2>When your data is used</h2>
-  <p>Only when you click <em>Fill this page</em> or press the keyboard shortcut. The extension then writes your saved details into the booking form on the page you are viewing, and shows a small card on that page saying what was filled. By default it does this only on TTD's booking sites (ttdevasthanams.ap.gov.in and tirupatibalaji.ap.gov.in); you can allow other sites in Settings. It never presses Continue, Submit or Pay, never solves a CAPTCHA, and never acts on a page without your action. Whatever you submit to TTD is covered by TTD's own policies.</p>
+  <p>Only when you click <em>Fill this page</em> or press the keyboard shortcut. The extension then writes your saved details into the booking form on the page you are viewing, and shows a small card on that page saying what was filled. To find the right boxes it reads the form's field labels on that page; it does not save or send any page content. By default it does this only on TTD's booking sites (ttdevasthanams.ap.gov.in and tirupatibalaji.ap.gov.in); you can allow other sites in Settings. It never presses Continue, Submit or Pay, never solves a CAPTCHA, and never acts on a page without your action. Whatever you submit to TTD is covered by TTD's own policies.</p>
   <p>Photos or documents you attach for Srivari Seva are sent into the page only when the booking type is Srivari Seva or Group Seva, and only to fill that page's upload box.</p>
 
   <h2>Sharing</h2>
   <p>Your data is not sold, shared, or transferred to anyone. It is not used for advertising, credit checks, or any purpose other than filling the forms you choose.</p>
+  <p>The use of information handled by TTD Govinda Autofill (Free) adheres to the <a href="https://developer.chrome.com/docs/webstore/program-policies/">Chrome Web Store User Data Policy</a>, including the Limited Use requirements.</p>
 
   <h2>Backups</h2>
   <p>If you use <em>Export</em>, Chrome saves a backup file on your computer, normally in your Downloads folder (or wherever Chrome asks you to save it, if you have turned that on). If a master password is set, the backup stays encrypted. Without one, the file is not encrypted and anyone who has it can read the ID numbers in it; the extension warns you about this before exporting. Keep the file somewhere private.</p>
