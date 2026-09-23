@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TTD Govinda Autofill (Free)</title>
+<meta name="description" content="Free Chrome extension: save pilgrim details once and fill TTD darshan and seva booking forms in one click. Unofficial, local-only, never submits.">
+<link rel="icon" href="icons/icon32.png">
+<style>
+  :root { --bg: #fffaf3; --card: #ffffff; --fg: #2b2118; --muted: #6b5b4b; --line: #f0dfc6; --accent: #b5460f; --ok: #1b7a3a; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --bg: #1d1915; --card: #26211b; --fg: #f1e9df; --muted: #a8998a; --line: #3a322a; --accent: #e0793f; --ok: #7bc47f; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 17px/1.6 system-ui, -apple-system, "Segoe UI", "Noto Sans Telugu", "Noto Sans Kannada",
+    "Noto Sans Devanagari", "Noto Sans Tamil", "Noto Sans Malayalam", sans-serif; }
+  header { background: linear-gradient(135deg, #fdb54a 0%, #e8731a 55%, #c2410c 100%); color: #fff; }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 16px; }
+  .hero { display: flex; gap: 22px; align-items: center; padding: 40px 0; }
+  .hero img { width: 96px; height: 96px; flex: none; filter: drop-shadow(0 6px 14px rgba(90, 26, 0, .35)); }
+  h1 { font-size: clamp(26px, 5vw, 40px); line-height: 1.15; margin: 0 0 6px; }
+  .hero p { margin: 0; font-size: 18px; opacity: .96; }
+  .pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .pills span { background: rgba(255, 255, 255, .95); color: #9a3a0c; font-weight: 700; font-size: 14px; padding: 4px 12px; border-radius: 999px; }
+  main { padding: 28px 0 48px; }
+  h2 { font-size: 22px; margin: 32px 0 10px; }
+  ul { padding-left: 22px; margin: 0; }
+  li { margin: 4px 0; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; }
+  .secure { border-left: 5px solid var(--ok); }
+  .langs { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 14px; }
+  .langs button { font: inherit; font-size: 15px; border: 1px solid var(--line); background: var(--card); color: var(--fg); border-radius: 999px;
+    padding: 5px 14px; cursor: pointer; }
+  .langs button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 700; }
+  .poster { width: 100%; max-width: 540px; display: block; border-radius: 14px; border: 1px solid var(--line); }
+  a { color: var(--accent); }
+  footer { border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; padding: 18px 0 30px; }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap hero">
+    <img src="icons/icon128.png" alt="">
+    <div>
+      <h1>TTD Govinda Autofill (Free)</h1>
+      <p>Save your family's pilgrim details once. On TTD's booking page, one click fills every pilgrim.</p>
+      <div class="pills"><span>Free seva</span><span>No ads</span><span>Stays on your computer</span><span>AES-256 password lock</span></div>
+    </div>
+  </div>
+</header>
+<main class="wrap">
+  <div class="card">
+    A free Chrome extension offered as a seva to Sri Venkateswara Swamy. It fills names, ages, gender, photo ID and ID numbers into
+    TTD's booking form (ttdevasthanams.ap.gov.in). You check the details and press Continue yourself: it never presses Continue,
+    Submit or Pay and never touches a CAPTCHA.
+  </div>
+
+  <h2>How to use</h2>
+  <div class="langs" role="group" aria-label="Language">
+    <button data-l="en">English</button><button data-l="te">తెలుగు</button><button data-l="kn">ಕನ್ನಡ</button>
+    <button data-l="hi">हिन्दी</button><button data-l="ta">தமிழ்</button><button data-l="ml">മലയാളം</button>
+  </div>
+  <img class="poster" id="poster" src="how-to/how-to-use-en.png" alt="How to use TTD Govinda Autofill, in four steps" width="1080" height="1350">
+
+  <h2>Your data is safe</h2>
+  <div class="card secure">
+    <ul>
+      <li>Saved only on your computer, in Chrome. Nothing is sent to any server; there is no account and no tracking.</li>
+      <li>Optionally lock it with your own password: your details are then encrypted with AES-256.</li>
+      <li>Works only on TTD's booking site unless you allow other sites in its Settings.</li>
+    </ul>
+    <p style="margin:10px 0 0">Full details: <a href="privacy-policy.html">Privacy policy</a></p>
+  </div>
+
+  <h2>Contact</h2>
+  <p>Questions or suggestions: <a href="mailto:udayadev95@gmail.com">udayadev95@gmail.com</a></p>
+</main>
+<footer>
+  <div class="wrap">Unofficial. Not made by, affiliated with or endorsed by Tirumala Tirupati Devasthanams (TTD). Om Namo Venkatesaya 🙏</div>
+</footer>
+<script>
+  // Poster language: remembered on this device only.
+  const poster = document.getElementById('poster');
+  const buttons = document.querySelectorAll('.langs button');
+  const pick = (l) => {
+    poster.src = `how-to/how-to-use-${l}.png`;
+    buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.l === l)));
+    try { localStorage.setItem('lang', l); } catch {}
+  };
+  buttons.forEach((b) => b.addEventListener('click', () => pick(b.dataset.l)));
+  let saved = null;
+  try { saved = localStorage.getItem('lang'); } catch {}
+  const guess = (navigator.language || 'en').slice(0, 2);
+  pick([...buttons].some((b) => b.dataset.l === saved) ? saved : [...buttons].some((b) => b.dataset.l === guess) ? guess : 'en');
+</script>
+</body>
+</html>
