@@ -41,7 +41,7 @@
   <p>If you set a master password, your saved pilgrim and contact details are encrypted with AES-256-GCM using a key derived from that password (PBKDF2, 310,000 iterations). The unlocked key is kept only in memory and is cleared when Chrome closes. The password itself is never stored. It is the extension's own optional lock, not your TTD login: the extension never reads or stores TTD login details or OTPs. Your language, reminder and release settings are not encrypted.</p>
 
   <h2>When your data is used</h2>
-  <p>Only when you click <em>Fill this page</em> or press the keyboard shortcut. The extension then writes your saved details into the booking form on the page you are viewing, and shows a small card on that page saying what was filled. To find the right boxes it reads the form's field labels on that page; it does not save or send any page content. By default it does this only on TTD's booking sites (ttdevasthanams.ap.gov.in and tirupatibalaji.ap.gov.in); you can allow other sites in Settings. It never presses Continue, Submit or Pay, never solves a CAPTCHA, and never acts on a page without your action. Whatever you submit to TTD is covered by TTD's own policies.</p>
+  <p>Only when you click <em>Fill this page</em> or press the keyboard shortcut. The extension then writes your saved details into the booking form on the page you are viewing, and shows a small card on that page saying what was filled. To find the right boxes it reads the form's field labels on that page; it does not save or send any page content. If you turn on the optional <em>Fill pilgrims</em> button, Chrome lets the extension show that button on TTD's booking pages; the button itself reads nothing, and pressing it fills the page exactly like the toolbar button. By default it does this only on TTD's booking sites (ttdevasthanams.ap.gov.in and tirupatibalaji.ap.gov.in); you can allow other sites in Settings. It never presses Continue, Submit or Pay, never solves a CAPTCHA, and never acts on a page without your action. Whatever you submit to TTD is covered by TTD's own policies.</p>
   <p>Photos or documents you attach for Srivari Seva are sent into the page only when the booking type is Srivari Seva or Group Seva, and only to fill that page's upload box.</p>
 
   <h2>Sharing</h2>
@@ -58,6 +58,7 @@
   <ul>
     <li><strong>storage, unlimitedStorage</strong>: to keep your details, including an optional photo or document, on your computer.</li>
     <li><strong>activeTab, scripting</strong>: to fill the booking form in the tab you are on, only when you ask, and to show the result card on that page.</li>
+    <li><strong>Optional access to TTD's sites</strong> (ttdevasthanams.ap.gov.in, tirupatibalaji.ap.gov.in): asked only if you turn on the on-page <em>Fill pilgrims</em> button, and used only to show that button. You can turn it off in Settings.</li>
     <li><strong>alarms, notifications</strong>: to remind you before quota releases. A few common releases are switched on at install with reminders 1 day and 15 minutes before; you can change or switch them off in the Releases tab.</li>
   </ul>
 
